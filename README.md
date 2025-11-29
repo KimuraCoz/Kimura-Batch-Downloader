@@ -11,8 +11,8 @@ This tool is designed to be **100% Portable & Universal**. You can run it from a
 
 ## Key Features (Fitur Utama)
 
-* Auto-Detect Location:** The script automatically creates a `Downloads` folder in the same directory where it runs. No manual path configuration needed!
-* Safe Filename System (Auto-Trim):** Automatically cuts filenames to 80 characters to prevent Windows `[Errno 22] Invalid argument` errors when downloading videos with long captions.
+* Auto-Detect Location: The script automatically creates a `Downloads` folder in the same directory where it runs. No manual path configuration needed!
+* Safe Filename System (Auto-Trim): Automatically cuts filenames to 80 characters to prevent Windows `[Errno 22] Invalid argument` errors when downloading videos with long captions.
 * Smart Resolution Selector:**
     * **Max/4K:** Best video + best audio.
     * **1080p & 720p:** Auto-fallback if the specific resolution is unavailable.
