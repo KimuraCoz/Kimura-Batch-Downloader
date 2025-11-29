@@ -1,22 +1,30 @@
 @echo off
-title Downloader V10 - Safe Filename (Kimura)
+title Downloader Portable - GitHub Edition
 color 0B
 
-:: --- SETTING PORTABLE ---
+:: --- SETTING PORTABLE (UNIVERSAL) ---
+:: %~dp0 artinya: "Lokasi folder dimana script ini berada"
 cd /d "%~dp0"
-set "LOKASI=D:\Penyimpanan Utama Kimura\Download"
+
+:: Otomatis simpan di folder "Downloads" di sebelah script ini
+set "LOKASI=%~dp0Downloads"
+
+:: Cek apakah folder Downloads ada? Jika tidak, buatkan otomatis.
+if not exist "%LOKASI%" mkdir "%LOKASI%"
 
 :: --- SETTING NAMA FILE AMAN (AUTO TRIM) ---
-:: Logika: Ambil Judul max 80 huruf + ID Unik.
-:: Ini mencegah error "Filename too long" pada video Facebook/TikTok caption panjang.
 set "SAFE_NAME=-o "%%(title).80s [%%(id)s].%%(ext)s""
 
 :MAIN_MENU
 cls
 echo ==================================================
-echo      DOWNLOADER
+echo      SIMPLE DOWNLOADER (PORTABLE EDITION)
 echo ==================================================
 echo.
+echo  [INFO] File akan disimpan di:
+echo  %LOKASI%
+echo.
+echo ==================================================
 
 set /p "url=Paste Link : "
 
@@ -52,8 +60,6 @@ echo.
 echo Sedang memproses Video...
 echo --------------------------------------------------
 
-:: Kita masukkan variable %SAFE_NAME% di setiap perintah
-
 if "%kualitas%"=="1" (
     yt-dlp.exe %SAFE_NAME% -P "%LOKASI%" --remux-video mp4 "%url%"
 ) else if "%kualitas%"=="2" (
@@ -71,7 +77,6 @@ goto SELESAI
 :DOWNLOAD_FOTO
 echo.
 echo Sedang mengambil Slide Foto...
-:: Mode Foto juga butuh Safe Name karena caption TikTok sering panjang
 yt-dlp.exe %SAFE_NAME% -P "%LOKASI%" --remux-video mp4 "%url%"
 if %errorlevel% neq 0 goto ERROR_HANDLER
 goto SELESAI
@@ -94,6 +99,6 @@ goto MAIN_MENU
 :SELESAI
 color 0A
 echo.
-echo [V] SUKSES!
+echo [V] SUKSES! Cek folder "Downloads".
 pause
 goto MAIN_MENU
